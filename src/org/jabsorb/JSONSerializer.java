@@ -729,7 +729,8 @@ public class JSONSerializer implements Serializable
       try
       {
         className = ((JSONObject) o).getString("javaClass");
-        return Class.forName(className);
+        Thread currentThread = Thread.currentThread();
+        return Class.forName(className, false, currentThread.getContextClassLoader());
       }
       catch (Exception e)
       {
